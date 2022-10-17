@@ -25,7 +25,11 @@ export default {
     async getRecipes() {
       try {
         const response = await axios.request(this.options)
-        console.log(response.data)
+        console.log([
+          ...new Set(
+            response.data.COOKRCP01.row.map((recipe) => recipe.RCP_WAY2)
+          )
+        ])
       } catch (error) {
         console.log(error)
       }
