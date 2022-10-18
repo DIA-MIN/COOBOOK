@@ -33,7 +33,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0;
+  padding-bottom: 1rem;
   height: 160px;
   background: linear-gradient(to right, $mainColor, $subColor);
 
