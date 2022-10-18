@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <h1>COOBOOK</h1>
+  <div class="header">
+    <router-link to="/"><h1>COOBOOK</h1></router-link>
     <ul class="menu">
       <li>
         <font-awesome-icon icon="fa-solid fa-star" class="icon-star" />
@@ -28,12 +28,13 @@ export default {
 </script>
 
 <style lang="scss">
-.container {
+.header {
   display: flex;
   justify-content: space-between;
   padding: 0 3.5rem;
 
   h1 {
+    display: inline-block;
     color: $mainColor;
   }
 
@@ -49,7 +50,6 @@ export default {
 
       span {
         color: $mainTextColor;
-        font-weight: bold;
         margin-left: 5px;
 
         &:hover {

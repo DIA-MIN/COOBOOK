@@ -10,10 +10,20 @@ $mainTextColor: rgb(64, 64, 64);
   font-style: normal;
 }
 
+a {
+  text-decoration: none;
+}
+
 ul {
   list-style: none;
 }
 
 body {
   font-family: Cafe24Ssurround;
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  all: unset;
 }
