@@ -57,6 +57,7 @@ export default {
           ? { ...cookway, isClicked: true }
           : { ...cookway, isClicked: false }
       )
+      this.$store.commit('setCookWay', way)
     },
     clickCookTypeHandler(type) {
       this.cookType = this.cookType.map((cooktype) =>
@@ -64,6 +65,7 @@ export default {
           ? { ...cooktype, isClicked: true }
           : { ...cooktype, isClicked: false }
       )
+      this.$store.commit('setCookType', type)
     },
     resetCategory() {
       this.cookType = this.cookType.map((type) => ({
@@ -74,6 +76,8 @@ export default {
         ...way,
         isClicked: false
       }))
+      this.$store.commit('setCookWay', '')
+      this.$store.commit('setCookType', '')
     }
   }
 }
@@ -130,6 +134,7 @@ export default {
 
   button {
     cursor: pointer;
+    margin-top: 10px;
     width: 130px;
     height: 45px;
     display: flex;

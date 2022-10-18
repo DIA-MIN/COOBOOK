@@ -17,9 +17,7 @@ export default {
     Category
   },
   data() {
-    return {
-      sampleData: ''
-    }
+    return {}
   },
   setup() {},
   created() {},
