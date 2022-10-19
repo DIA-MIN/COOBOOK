@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="container">
     <router-link to="/"><h1>COOBOOK</h1></router-link>
     <ul class="menu">
       <li>
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss">
-.header {
+.container {
   display: flex;
   justify-content: space-between;
   padding: 0 3.5rem;
