@@ -78,6 +78,7 @@ export default {
       }))
       this.$store.commit('setCookWay', '')
       this.$store.commit('setCookType', '')
+      this.$store.commit('setRest', true)
     }
   }
 }

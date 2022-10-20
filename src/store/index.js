@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     COOK_TYPE: '',
-    COOK_WAY: ''
+    COOK_WAY: '',
+    isReset: false
   },
   getters: {},
   mutations: {
@@ -12,16 +13,12 @@ export default createStore({
     },
     setCookWay(state, COOK_WAY) {
       state.COOK_WAY = COOK_WAY
+    },
+    setRest(state, isReset) {
+      state.isReset = isReset
     }
   },
   actions: {},
   modules: {},
-  watch: {
-    setCookType(value) {
-      console.log(value)
-    },
-    setCookWay(value) {
-      console.log(value)
-    }
-  }
+  watch: {}
 })

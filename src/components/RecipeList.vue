@@ -13,9 +13,9 @@
     <div class="pagination">
       <button :disabled="page === 0" @click="prevPage">이전</button>
       <div class="page_info">
-        <span>{{ page + 1 }}</span> / {{ totalPage }} 페이지
+        <span>{{ resetPage + 1 }}</span> / {{ totalPage }} 페이지
       </div>
-      <button :disabled="page >= page_size - 1" @click="nextPage">다음</button>
+      <button :disabled="page >= totalPage - 1" @click="nextPage">다음</button>
     </div>
   </div>
 </template>
@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       recipes: [],
+      filterRecipes: [],
       page: 0,
       pagePerItem: 30,
       options: {
@@ -39,23 +40,59 @@ export default {
   setup() {},
   created() {
     this.getRecipes()
+    console.log(this.$store.state.isReset)
   },
   mounted() {},
   unmounted() {},
   computed: {
     totalPage() {
-      let recipeLeng = this.recipes.length,
-        recipeSize = this.pagePerItem,
-        page = Math.floor(recipeLeng / recipeSize)
+      const recipes = this.filterRecipe.length
+        ? this.filterRecipe
+        : this.recipes
+      let recipeLeng = recipes.length
+      let recipeSize = this.pagePerItem
+      let page = Math.floor(recipeLeng / recipeSize)
 
       if (recipeLeng % recipeSize > 0) page += 1
 
       return page
     },
     paginatedData() {
-      const start = this.page * this.pagePerItem,
-        end = start + this.pagePerItem
-      return this.recipes.slice(start, end)
+      const recipes = this.filterRecipe.length
+        ? this.filterRecipe
+        : this.recipes
+      const start = this.page * this.pagePerItem
+      const end = start + this.pagePerItem
+
+      return recipes.slice(start, end)
+    },
+    filterRecipe() {
+      if (this.$store.state.COOK_WAY && this.$store.state.COOK_TYPE) {
+        this.page = 0
+        return this.recipes.filter(
+          (recipe) =>
+            recipe.RCP_WAY2 === this.$store.state.COOK_WAY &&
+            recipe.RCP_PAT2 === this.$store.state.COOK_TYPE
+        )
+      } else if (this.$store.state.COOK_WAY) {
+        this.page = 0
+        return this.recipes.filter(
+          (recipe) => recipe.RCP_WAY2 === this.$store.state.COOK_WAY
+        )
+      } else if (this.$store.state.COOK_TYPE) {
+        this.page = 0
+        return this.recipes.filter(
+          (recipe) => recipe.RCP_PAT2 === this.$store.state.COOK_TYPE
+        )
+      }
+      return []
+    },
+    resetPage() {
+      if (this.$store.state.isReset) {
+        this.page = 0
+        this.$store.commit('setRest', false)
+      }
+      return this.page
     }
   },
   methods: {
@@ -166,9 +203,10 @@ export default {
       border-radius: 10px;
       margin: 0 1.5rem;
 
-      &:active {
+      &:hover {
         background-color: $mainColor;
         color: white;
+        transition: 0.3s ease;
       }
     }
 
