@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <ul class="list">
+    <Loader v-if="isLoading === true" />
+    <ul class="list" v-if="isLoading === false">
       <li v-for="recipe in paginatedData" :key="recipe.RCP_SEQ">
         <div class="recipe_img">
           <div class="img_blur"></div>
@@ -21,29 +22,23 @@
 </template>
 <script>
 import axios from 'axios'
+import Loader from '@/components/Loader.vue'
 
 export default {
   name: 'RecipeList',
-  components: {},
+  components: { Loader },
   data() {
     return {
       recipes: [],
-      filterRecipes: [],
       page: 0,
       pagePerItem: 30,
-      options: {
-        method: 'GET',
-        url: `http://openapi.foodsafetykorea.go.kr/api/${process.env.VUE_APP_API_KEY}/COOKRCP01/json/1/1000`
-      }
+      isLoading: false
     }
   },
-  setup() {},
   created() {
+    this.isLoading = true
     this.getRecipes()
-    console.log(this.$store.state.isReset)
   },
-  mounted() {},
-  unmounted() {},
   computed: {
     totalPage() {
       const recipes = this.filterRecipe.length
@@ -98,9 +93,15 @@ export default {
   methods: {
     async getRecipes() {
       try {
-        const response = await axios.request(this.options)
+        this.isLoading = true
+        const options = {
+          method: 'GET',
+          url: `http://openapi.foodsafetykorea.go.kr/api/${process.env.VUE_APP_API_KEY}/COOKRCP01/json/1/1000`
+        }
+        const response = await axios.request(options)
         console.log(response.data.COOKRCP01)
         this.recipes = [...response.data.COOKRCP01.row]
+        this.isLoading = false
       } catch (error) {
         console.log(error)
       }
