@@ -5,6 +5,7 @@
     <Category />
     <Loader v-if="isLoading === true" />
     <RecipeList v-if="isLoading === false" :recipes="recipes" />
+    <Footer />
   </div>
 </template>
 <script>
@@ -13,6 +14,7 @@ import Banner from '@/components/Banner.vue'
 import Category from '@/components/Category.vue'
 import RecipeList from '@/components/RecipeList.vue'
 import Loader from '@/components/Loader.vue'
+import Footer from '@/components/Footer.vue'
 import axios from 'axios'
 
 export default {
@@ -21,7 +23,8 @@ export default {
     Banner,
     Category,
     RecipeList,
-    Loader
+    Loader,
+    Footer
   },
   data() {
     return {
