@@ -35,3 +35,18 @@ button {
   font-family: Cafe24Ssurround;
   border: none;
 }
+
+.scroll {
+  &::-webkit-scrollbar {
+    width: 20px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $subColor;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+}

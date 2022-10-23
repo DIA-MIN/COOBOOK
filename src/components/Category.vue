@@ -2,7 +2,7 @@
   <div class="category">
     <div class="category_classify">
       <span>조리방법</span>
-      <ul>
+      <ul class="list_category">
         <li
           v-for="way in cookWay"
           :key="way.category"
@@ -15,7 +15,7 @@
     </div>
     <div class="category_classify">
       <span>요리종류</span>
-      <ul>
+      <ul class="list_category">
         <li
           v-for="type in cookType"
           :key="type.category"
@@ -83,7 +83,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .category {
   width: 80%;
   margin: auto;
@@ -107,7 +107,7 @@ export default {
       padding-right: 1.5rem;
     }
 
-    ul {
+    .list_category {
       display: flex;
       align-items: center;
       color: $mainTextColor;

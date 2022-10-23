@@ -2,12 +2,12 @@
   <div>
     <Header />
     <Banner />
-    <Loader v-if="isLoading === true" />
     <h2 v-if="isLoading === false">
       '<span>{{ searchData }}</span
       >'에 대한 검색 결과는 다음과 같습니다. <span>{{ recipes.length }}</span
       >건
     </h2>
+    <Loader v-if="isLoading === true" />
     <RecipeList v-if="isLoading === false" :recipes="recipes" />
     <Footer />
   </div>

@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <ul class="list">
-      <li v-for="recipe in paginatedData" :key="recipe.RCP_SEQ">
+      <li
+        v-for="recipe in paginatedData"
+        :key="recipe.RCP_SEQ"
+        @click="openModal(recipe)"
+      >
         <div class="recipe_img">
           <div class="img_blur"></div>
           <img :src="recipe.ATT_FILE_NO_MAIN" alt="recipe_img" />
@@ -17,12 +21,19 @@
       </div>
       <button :disabled="page >= totalPage - 1" @click="nextPage">다음</button>
     </div>
+    <RecipeDetail
+      v-if="isClicked"
+      @close-modal="isClicked = false"
+      :recipe="recipe"
+    />
   </div>
 </template>
 <script>
+import RecipeDetail from '@/components/RecipeDetail.vue'
+
 export default {
   name: 'RecipeList',
-  components: {},
+  components: { RecipeDetail },
   props: {
     recipes: {
       type: Object
@@ -31,7 +42,9 @@ export default {
   data() {
     return {
       page: 0,
-      pagePerItem: 30
+      pagePerItem: 30,
+      isClicked: false,
+      recipe: {}
     }
   },
   created() {},
@@ -92,6 +105,10 @@ export default {
     },
     nextPage() {
       this.page += 1
+    },
+    openModal(recipe) {
+      this.recipe = recipe
+      this.isClicked = true
     }
   }
 }

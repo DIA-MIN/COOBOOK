@@ -7,10 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
   faStar,
   faMagnifyingGlass,
-  faArrowsRotate
+  faArrowsRotate,
+  faSquareXmark
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faStar, faMagnifyingGlass, faArrowsRotate)
+library.add(faStar, faMagnifyingGlass, faArrowsRotate, faSquareXmark)
 
 createApp(App)
   .use(store)
