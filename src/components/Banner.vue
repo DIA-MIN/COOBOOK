@@ -1,13 +1,20 @@
 <template>
   <div class="banner">
     <h1>원하는 레시피를 한눈에!</h1>
-    <div class="search">
-      <input type="text" placeholder="찾으실 레시피를 입력해주세요." />
-      <font-awesome-icon
-        icon="fa-solid fa-magnifying-glass"
-        class="icon_search"
+    <form class="search" v-on:submit="searchSubmitHandler">
+      <input
+        type="text"
+        placeholder="찾으실 레시피를 입력해주세요."
+        :value="data"
+        @input="searchOnChangeHandler"
       />
-    </div>
+      <button type="submit">
+        <font-awesome-icon
+          icon="fa-solid fa-magnifying-glass"
+          class="icon_search"
+        />
+      </button>
+    </form>
   </div>
 </template>
 <script>
@@ -16,14 +23,22 @@ export default {
   components: {},
   data() {
     return {
-      sampleData: ''
+      data: ''
     }
   },
   setup() {},
   created() {},
   mounted() {},
   unmounted() {},
-  methods: {}
+  methods: {
+    searchOnChangeHandler(event) {
+      this.data = event.target.value
+    },
+    searchSubmitHandler(event) {
+      event.preventDefault()
+      this.$router.push({ name: 'result', query: { searchData: this.data } })
+    }
+  }
 }
 </script>
 
@@ -57,16 +72,23 @@ export default {
       color: $mainTextColor;
     }
 
-    .icon_search {
-      cursor: pointer;
-      position: absolute;
-      color: $mainColor;
-      right: 1.25rem;
-      font-size: 18px;
+    button {
+      all: unset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      &:hover {
-        transform: scale(1.2);
-        transition: 0.4s ease;
+      .icon_search {
+        cursor: pointer;
+        position: absolute;
+        color: $mainColor;
+        right: 1.25rem;
+        font-size: 18px;
+
+        &:hover {
+          transform: scale(1.2);
+          transition: 0.4s ease;
+        }
       }
     }
   }
