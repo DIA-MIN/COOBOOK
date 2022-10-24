@@ -9,7 +9,23 @@
         <div class="recipe_img">
           <div class="img_blur"></div>
           <img :src="recipe.ATT_FILE_NO_MAIN" alt="recipe_img" />
-          <font-awesome-icon icon="fa-solid fa-star" class="icon_star" />
+          <font-awesome-icon
+            icon="fa-solid fa-star"
+            :class="
+              scraps.length
+                ? getScrapsSEQ.includes(recipe.RCP_SEQ)
+                  ? 'icon_star clamp'
+                  : 'icon_star'
+                : 'icon_star'
+            "
+            @click.stop="
+              scraps.length
+                ? getScrapsSEQ.includes(recipe.RCP_SEQ)
+                  ? delScrap(recipe)
+                  : setScrap(recipe)
+                : setScrap(recipe)
+            "
+          />
         </div>
         <span>{{ recipe.RCP_NM }}</span>
       </li>
@@ -44,7 +60,8 @@ export default {
       page: 0,
       pagePerItem: 30,
       isClicked: false,
-      recipe: {}
+      recipe: {},
+      scraps: JSON.parse(localStorage.getItem('recipeScrap')) || []
     }
   },
   created() {},
@@ -97,6 +114,9 @@ export default {
         this.$store.commit('setRest', false)
       }
       return this.page
+    },
+    getScrapsSEQ() {
+      return this.scraps.map((scrap) => scrap.RCP_SEQ)
     }
   },
   methods: {
@@ -109,6 +129,17 @@ export default {
     openModal(recipe) {
       this.recipe = recipe
       this.isClicked = true
+    },
+    setScrap(scrap) {
+      this.scraps = [...this.scraps, scrap]
+      console.log('set!', this.setScraps)
+      localStorage.setItem('recipeScrap', JSON.stringify(this.scraps))
+    },
+    delScrap(scrap) {
+      console.log('잘 들어왔니?', scrap.RCP_SEQ)
+      console.log(this.scraps.filter((item) => item.RCP_SEQ !== scrap.RCP_SEQ))
+      this.scraps = this.scraps.filter((item) => item.RCP_SEQ !== scrap.RCP_SEQ)
+      localStorage.setItem('recipeScrap', JSON.stringify(this.scraps))
     }
   }
 }
@@ -169,6 +200,10 @@ export default {
           top: 10px;
           right: 10px;
           z-index: 2;
+        }
+
+        .icon_star.clamp {
+          color: $subColor;
         }
       }
 

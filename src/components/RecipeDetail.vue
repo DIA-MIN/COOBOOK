@@ -127,7 +127,7 @@ export default {
     display: flex;
     padding: 1.5rem;
     flex-direction: column;
-    width: 900px;
+    width: 800px;
     height: 650px;
     border-radius: 10px;
     background-color: white;
