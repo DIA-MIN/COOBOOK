@@ -4,7 +4,7 @@
     <ul class="menu">
       <li>
         <font-awesome-icon icon="fa-solid fa-star" class="icon-star" />
-        <span>스크랩</span>
+        <router-link to="/scrap"><span>스크랩</span></router-link>
       </li>
     </ul>
   </div>

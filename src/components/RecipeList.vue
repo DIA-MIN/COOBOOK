@@ -52,11 +52,12 @@ export default {
   components: { RecipeDetail },
   props: {
     recipes: {
-      type: Object
+      type: Array
     }
   },
   data() {
     return {
+      allRecipe: [],
       page: 0,
       pagePerItem: 30,
       isClicked: false,
@@ -64,12 +65,14 @@ export default {
       scraps: JSON.parse(localStorage.getItem('recipeScrap')) || []
     }
   },
-  created() {},
+  created() {
+    this.allRecipe = this.recipes
+  },
   computed: {
     totalPage() {
       const recipes = this.filterRecipe.length
         ? this.filterRecipe
-        : this.recipes
+        : this.allRecipe
       let recipeLeng = recipes.length
       let recipeSize = this.pagePerItem
       let page = Math.floor(recipeLeng / recipeSize)
@@ -81,7 +84,7 @@ export default {
     paginatedData() {
       const recipes = this.filterRecipe.length
         ? this.filterRecipe
-        : this.recipes
+        : this.allRecipe
       const start = this.page * this.pagePerItem
       const end = start + this.pagePerItem
 
@@ -90,19 +93,19 @@ export default {
     filterRecipe() {
       if (this.$store.state.COOK_WAY && this.$store.state.COOK_TYPE) {
         this.page = 0
-        return this.recipes.filter(
+        return this.allRecipe.filter(
           (recipe) =>
             recipe.RCP_WAY2 === this.$store.state.COOK_WAY &&
             recipe.RCP_PAT2 === this.$store.state.COOK_TYPE
         )
       } else if (this.$store.state.COOK_WAY) {
         this.page = 0
-        return this.recipes.filter(
+        return this.allRecipe.filter(
           (recipe) => recipe.RCP_WAY2 === this.$store.state.COOK_WAY
         )
       } else if (this.$store.state.COOK_TYPE) {
         this.page = 0
-        return this.recipes.filter(
+        return this.allRecipe.filter(
           (recipe) => recipe.RCP_PAT2 === this.$store.state.COOK_TYPE
         )
       }
@@ -132,13 +135,13 @@ export default {
     },
     setScrap(scrap) {
       this.scraps = [...this.scraps, scrap]
-      console.log('set!', this.setScraps)
       localStorage.setItem('recipeScrap', JSON.stringify(this.scraps))
     },
     delScrap(scrap) {
-      console.log('잘 들어왔니?', scrap.RCP_SEQ)
-      console.log(this.scraps.filter((item) => item.RCP_SEQ !== scrap.RCP_SEQ))
       this.scraps = this.scraps.filter((item) => item.RCP_SEQ !== scrap.RCP_SEQ)
+      this.allRecipe = this.allRecipe.filter(
+        (item) => item.RCP_SEQ !== scrap.RCP_SEQ
+      )
       localStorage.setItem('recipeScrap', JSON.stringify(this.scraps))
     }
   }

@@ -18,6 +18,17 @@ const routes = [
       import(
         /* webpackChunkName: "result" webpackPrefetch: true */ '../views/SearchResultView.vue'
       )
+  },
+  {
+    path: '/scrap',
+    name: 'scrap',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "scrap" webpackPrefetch: true */ '../views/ScrapView.vue'
+      )
   }
 ]
 
