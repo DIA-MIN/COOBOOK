@@ -32,7 +32,8 @@ export default {
     return {
       isLoading: false,
       recipes: [],
-      searchData: ''
+      searchData: '',
+      total: ''
     }
   },
   setup() {},
@@ -56,7 +57,10 @@ export default {
         }
         const response = await axios.request(options)
         console.log(response.data.COOKRCP01)
-        this.recipes = [...response.data.COOKRCP01.row]
+        this.total = response.data.COOKRCP01.total_count
+        if (response.data.COOKRCP01.total_count !== '0') {
+          this.recipes = [...response.data.COOKRCP01.row]
+        }
         this.isLoading = false
       } catch (error) {
         console.log(error)

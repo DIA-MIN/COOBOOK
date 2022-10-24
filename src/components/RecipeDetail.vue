@@ -43,6 +43,15 @@
           </li>
         </ul>
       </div>
+      <div class="process">
+        <span class="process_title">조리 과정</span>
+        <ul class="list_process">
+          <li v-for="manual in getManual" :key="manual">
+            <img :src="manual.img" alt="manual_img" />
+            <span>{{ manual.explain }}</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -60,7 +69,6 @@ export default {
   setup() {},
   created() {
     console.log(this.recipe)
-    // this.initObject()
   },
   mounted() {},
   unmounted() {},
@@ -72,6 +80,29 @@ export default {
         .split('.')
         .filter((detail) => detail.includes('('))
         .map((detail) => (detail[0] === ' ' ? detail.replace(' ', '') : detail))
+    },
+    getManual() {
+      const manuals = []
+      const manualImgs = []
+      const process = []
+      Object.keys(this.recipe)
+        .filter((atr) => atr.includes('MANUAL'))
+        .filter((manual) => this.recipe[manual])
+        .sort()
+        .forEach((manual) => {
+          manual.includes('MANUAL_IMG')
+            ? manualImgs.push(manual)
+            : manuals.push(manual)
+        })
+
+      for (let manual = 0; manual < manuals.length; manual++) {
+        process.push({
+          explain: this.recipe[manuals[manual]],
+          img: this.recipe[manualImgs[manual]]
+        })
+      }
+      // console.log(manuals, manualImgs)
+      return process
     }
   }
 }
@@ -104,9 +135,11 @@ export default {
     align-items: center;
 
     .icon_close {
+      position: sticky;
+      top: 0;
       cursor: pointer;
       align-self: flex-end;
-      font-size: 24px;
+      font-size: 30px;
       color: $mainColor;
 
       &:hover {
@@ -177,6 +210,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-bottom: 3rem;
 
       .ingredient_title {
         font-size: 24px;
@@ -188,12 +222,53 @@ export default {
       .list_ingredient {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        column-gap: 10px;
-        row-gap: 10px;
+        column-gap: 15px;
+        row-gap: 15px;
 
         li {
           color: $mainTextColor;
           text-align: center;
+        }
+      }
+    }
+
+    .process {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .process_title {
+        font-size: 24px;
+        padding-bottom: 5px;
+        border-bottom: 5px solid $mainColor;
+        margin-bottom: 20px;
+      }
+
+      .list_process {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        li {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 1rem 0;
+          width: 550px;
+
+          img {
+            // width: 300px;
+            // height: 300px;
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+          }
+
+          span {
+            color: $mainTextColor;
+            font-size: 20px;
+          }
         }
       }
     }

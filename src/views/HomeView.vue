@@ -48,7 +48,6 @@ export default {
           url: `http://openapi.foodsafetykorea.go.kr/api/${process.env.VUE_APP_API_KEY}/COOKRCP01/json/1/1000`
         }
         const response = await axios.request(options)
-        console.log(response.data.COOKRCP01)
         this.recipes = [...response.data.COOKRCP01.row]
         this.isLoading = false
       } catch (error) {
