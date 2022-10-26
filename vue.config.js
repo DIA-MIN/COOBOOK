@@ -1,5 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
+  publicPath: '/COOBOOK/',
+  outputDir: 'dist',
   lintOnSave: false,
   transpileDependencies: true,
   css: {
