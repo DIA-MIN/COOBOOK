@@ -276,17 +276,14 @@ export default {
 @media screen and (max-width: 768px) {
   .container {
     .list {
-      display: grid;
       grid-template-columns: repeat(4, 1fr);
       padding: 2rem;
 
       li {
-        .icon_star {
-          font-size: 14px;
-        }
-
-        .icon_star.clamp {
-          color: $subColor;
+        .recipe_img {
+          .icon_star {
+            font-size: 20px;
+          }
         }
       }
 
@@ -315,6 +312,19 @@ export default {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       padding: 2rem;
+
+      li {
+        .recipe_img {
+          .img_blur {
+            display: block;
+            background-color: rgba(0, 0, 0, 0.1);
+          }
+
+          .icon_star {
+            display: block;
+          }
+        }
+      }
     }
   }
 }
