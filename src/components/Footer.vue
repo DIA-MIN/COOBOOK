@@ -20,4 +20,10 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    font-size: 12px;
+  }
+}
 </style>
