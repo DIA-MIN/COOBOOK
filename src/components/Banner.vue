@@ -37,7 +37,7 @@ export default {
     searchSubmitHandler(event) {
       event.preventDefault()
       this.$router.push({ name: 'result', query: { searchData: this.data } })
-      // this.data = ''
+      this.data = ''
     }
   }
 }
