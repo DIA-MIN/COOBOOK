@@ -64,4 +64,20 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 0 2rem;
+
+    h1 {
+      font-size: 24px;
+    }
+
+    ul {
+      li {
+        font-size: 14px;
+      }
+    }
+  }
+}
 </style>
