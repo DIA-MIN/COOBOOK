@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div id="main">
     <Header />
     <Banner />
     <router-view />
-    <Footer />
   </div>
+  <Footer />
 </template>
 <script>
 import Header from '@/components/Header.vue'

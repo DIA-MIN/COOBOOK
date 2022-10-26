@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <footer class="container">
     Copyright ⓒ 2022 Park Min Seok. All Rights Reserved.
-  </div>
+  </footer>
 </template>
 <script>
 export default {
@@ -19,6 +19,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  transform: translateY(-100%);
 }
 
 @media screen and (max-width: 500px) {

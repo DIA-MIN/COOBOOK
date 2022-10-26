@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <header class="container">
     <router-link to="/"><h1>COOBOOK</h1></router-link>
     <ul class="menu">
       <li>
@@ -7,7 +7,7 @@
         <router-link to="/scrap"><span>스크랩</span></router-link>
       </li>
     </ul>
-  </div>
+  </header>
 </template>
 
 <script>
