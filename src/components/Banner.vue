@@ -93,4 +93,24 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .banner {
+    h1 {
+      font-size: 28px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .banner {
+    h1 {
+      font-size: 24px;
+    }
+
+    .search {
+      width: 350px;
+    }
+  }
+}
 </style>
