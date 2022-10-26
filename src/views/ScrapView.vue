@@ -1,24 +1,15 @@
 <template>
   <div class="home">
-    <Header />
-    <Banner />
-    <h2 v-if="recipes.length < 1">스크랩된 레시피가 없습니다.</h2>
+    <div v-if="recipes.length < 1" class="msg">스크랩된 레시피가 없습니다.</div>
     <RecipeList :recipes="recipes" types="scrap" />
-    <Footer />
   </div>
 </template>
 <script>
-import Header from '@/components/Header.vue'
-import Banner from '@/components/Banner.vue'
 import RecipeList from '@/components/RecipeList.vue'
-import Footer from '@/components/Footer.vue'
 
 export default {
   components: {
-    Header,
-    Banner,
-    RecipeList,
-    Footer
+    RecipeList
   },
   data() {
     return {
@@ -28,9 +19,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-h2 {
-  padding-left: 6.5rem;
-  margin-bottom: 0;
+.msg {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   span {
     color: $mainColor;

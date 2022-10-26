@@ -1,30 +1,21 @@
 <template>
   <div class="home">
-    <Header />
-    <Banner />
     <Category />
     <Loader v-if="isLoading === true" />
     <RecipeList v-if="isLoading === false" :recipes="recipes" types="all" />
-    <Footer />
   </div>
 </template>
 <script>
-import Header from '@/components/Header.vue'
-import Banner from '@/components/Banner.vue'
 import Category from '@/components/Category.vue'
 import RecipeList from '@/components/RecipeList.vue'
 import Loader from '@/components/Loader.vue'
-import Footer from '@/components/Footer.vue'
 import axios from 'axios'
 
 export default {
   components: {
-    Header,
-    Banner,
     Category,
     RecipeList,
-    Loader,
-    Footer
+    Loader
   },
   data() {
     return {

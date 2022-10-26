@@ -1,32 +1,24 @@
 <template>
   <div>
-    <Header />
-    <Banner />
-    <h2 v-if="isLoading === false">
+    <div v-if="isLoading === false" class="msg">
       '<span>{{ searchData }}</span
-      >'에 대한 검색 결과는 다음과 같습니다. <span>{{ recipes.length }}</span
+      >'에 대한 검색 결과는 다음과 같습니다.<span
+        >&nbsp;{{ recipes.length }}</span
       >건
-    </h2>
+    </div>
     <Loader v-if="isLoading === true" />
     <RecipeList v-if="isLoading === false" :recipes="recipes" types="search" />
-    <Footer />
   </div>
 </template>
 <script>
-import Header from '@/components/Header.vue'
-import Banner from '@/components/Banner.vue'
 import RecipeList from '@/components/RecipeList.vue'
 import Loader from '@/components/Loader.vue'
-import Footer from '@/components/Footer.vue'
 import axios from 'axios'
 
 export default {
   components: {
-    Header,
-    Banner,
     RecipeList,
-    Loader,
-    Footer
+    Loader
   },
   data() {
     return {
@@ -60,6 +52,8 @@ export default {
         this.total = response.data.COOKRCP01.total_count
         if (response.data.COOKRCP01.total_count !== '0') {
           this.recipes = [...response.data.COOKRCP01.row]
+        } else {
+          this.recipes = []
         }
         this.isLoading = false
       } catch (error) {
@@ -70,10 +64,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-h2 {
-  padding-left: 6.5rem;
-  margin-bottom: 0;
-
+.msg {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   span {
     color: $mainColor;
   }

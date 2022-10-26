@@ -30,7 +30,7 @@
         <span>{{ recipe.RCP_NM }}</span>
       </li>
     </ul>
-    <div class="pagination">
+    <div class="pagination" v-if="paginatedData.length">
       <button :disabled="page === 0" @click="prevPage">이전</button>
       <div class="page_info">
         <div v-if="totalPage !== 0">
@@ -164,6 +164,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
