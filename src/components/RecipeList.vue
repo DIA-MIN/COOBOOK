@@ -53,6 +53,9 @@ export default {
   props: {
     recipes: {
       type: Array
+    },
+    types: {
+      type: String
     }
   },
   data() {
@@ -66,13 +69,19 @@ export default {
     }
   },
   created() {
-    this.allRecipe = this.recipes
+    console.log(this.types)
+    if (this.types === 'scrap') {
+      this.allRecipe = this.recipes
+    }
   },
   computed: {
     totalPage() {
-      const recipes = this.filterRecipe.length
-        ? this.filterRecipe
-        : this.allRecipe
+      const recipes =
+        this.types === 'scrap'
+          ? this.allRecipe
+          : this.filterRecipe.length
+          ? this.filterRecipe
+          : this.recipes
       let recipeLeng = recipes.length
       let recipeSize = this.pagePerItem
       let page = Math.floor(recipeLeng / recipeSize)
@@ -82,9 +91,12 @@ export default {
       return page
     },
     paginatedData() {
-      const recipes = this.filterRecipe.length
-        ? this.filterRecipe
-        : this.allRecipe
+      const recipes =
+        this.types === 'scrap'
+          ? this.allRecipe
+          : this.filterRecipe.length
+          ? this.filterRecipe
+          : this.recipes
       const start = this.page * this.pagePerItem
       const end = start + this.pagePerItem
 
@@ -93,19 +105,19 @@ export default {
     filterRecipe() {
       if (this.$store.state.COOK_WAY && this.$store.state.COOK_TYPE) {
         this.page = 0
-        return this.allRecipe.filter(
+        return this.recipes.filter(
           (recipe) =>
             recipe.RCP_WAY2 === this.$store.state.COOK_WAY &&
             recipe.RCP_PAT2 === this.$store.state.COOK_TYPE
         )
       } else if (this.$store.state.COOK_WAY) {
         this.page = 0
-        return this.allRecipe.filter(
+        return this.recipes.filter(
           (recipe) => recipe.RCP_WAY2 === this.$store.state.COOK_WAY
         )
       } else if (this.$store.state.COOK_TYPE) {
         this.page = 0
-        return this.allRecipe.filter(
+        return this.recipes.filter(
           (recipe) => recipe.RCP_PAT2 === this.$store.state.COOK_TYPE
         )
       }
@@ -254,6 +266,52 @@ export default {
       span {
         color: $mainColor;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    .list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 2rem;
+
+      li {
+        .icon_star {
+          font-size: 14px;
+        }
+
+        .icon_star.clamp {
+          color: $subColor;
+        }
+      }
+
+      span {
+        font-size: 14px;
+      }
+    }
+  }
+  .pagination {
+    button {
+      width: 60px;
+      height: 35px;
+      margin: 0 1.25rem;
+    }
+
+    .page_info {
+      width: 110px;
+      font-size: 14px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    .list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 2rem;
     }
   }
 }
