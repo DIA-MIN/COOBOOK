@@ -221,6 +221,9 @@ export default {
         row-gap: 15px;
 
         li {
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          padding: 8px;
+          border-radius: 10px;
           color: $mainTextColor;
           text-align: center;
         }
@@ -263,6 +266,158 @@ export default {
           span {
             color: $mainTextColor;
             font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal_wrapper {
+    .modal {
+      padding: 1rem;
+      flex-direction: column;
+      width: 600px;
+      height: 650px;
+
+      .icon_close {
+        font-size: 24px;
+      }
+
+      .submary {
+        img {
+          width: 400px;
+          height: 300px;
+          border-radius: 10px;
+        }
+
+        h2 {
+          font-size: 20px;
+          padding: 1rem;
+        }
+      }
+
+      .info {
+        .info_title {
+          font-size: 20px;
+        }
+
+        .list_info {
+          li {
+            font-size: 14px;
+            padding: 1rem;
+            margin: 0 5px;
+          }
+        }
+      }
+
+      .ingredient {
+        .ingredient_title {
+          font-size: 20px;
+        }
+
+        .list_ingredient {
+          display: grid;
+          font-size: 14px;
+          grid-template-columns: repeat(4, 1fr);
+          column-gap: 15px;
+          row-gap: 15px;
+        }
+      }
+
+      .process {
+        .process_title {
+          font-size: 20px;
+        }
+
+        .list_process {
+          li {
+            width: 450px;
+
+            span {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .modal_wrapper {
+    .modal {
+      padding: 1rem;
+      flex-direction: column;
+      width: 300px;
+      height: 550px;
+
+      .icon_close {
+        font-size: 24px;
+      }
+
+      .submary {
+        img {
+          width: 280px;
+          height: 200px;
+          border-radius: 10px;
+        }
+
+        h2 {
+          font-size: 16px;
+          padding: 10px;
+        }
+      }
+
+      .info {
+        .info_title {
+          font-size: 20px;
+        }
+
+        .list_info {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          column-gap: 10px;
+          row-gap: 10px;
+          li {
+            font-size: 14px;
+            padding: 1rem;
+          }
+        }
+      }
+
+      .ingredient {
+        .ingredient_title {
+          font-size: 20px;
+        }
+
+        .list_ingredient {
+          display: grid;
+          font-size: 14px;
+          grid-template-columns: repeat(3, 1fr);
+          column-gap: 10px;
+          row-gap: 15px;
+
+          li {
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+
+      .process {
+        .process_title {
+          font-size: 20px;
+        }
+
+        .list_process {
+          li {
+            width: 250px;
+
+            span {
+              font-size: 14px;
+            }
           }
         }
       }
