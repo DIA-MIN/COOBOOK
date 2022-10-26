@@ -37,7 +37,6 @@ export default {
     this.isLoading = true
     this.getRecipes()
   },
-  mounted() {},
   unmounted() {},
   methods: {
     async getRecipes() {

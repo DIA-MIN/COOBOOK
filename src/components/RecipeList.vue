@@ -8,7 +8,7 @@
       >
         <div class="recipe_img">
           <div class="img_blur"></div>
-          <img :src="recipe.ATT_FILE_NO_MAIN" alt="recipe_img" />
+          <img :data-lazy="recipe.ATT_FILE_NO_MAIN" v-lazyload />
           <font-awesome-icon
             icon="fa-solid fa-star"
             :class="
@@ -33,7 +33,10 @@
     <div class="pagination">
       <button :disabled="page === 0" @click="prevPage">이전</button>
       <div class="page_info">
-        <span>{{ resetPage + 1 }}</span> / {{ totalPage }} 페이지
+        <div v-if="totalPage !== 0">
+          <span>{{ resetPage + 1 }}</span> / {{ totalPage }} 페이지
+        </div>
+        <div v-if="totalPage === 0">첫 페이지</div>
       </div>
       <button :disabled="page >= totalPage - 1" @click="nextPage">다음</button>
     </div>
@@ -69,7 +72,6 @@ export default {
     }
   },
   created() {
-    console.log(this.types)
     if (this.types === 'scrap') {
       this.allRecipe = this.recipes
     }

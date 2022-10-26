@@ -7,7 +7,7 @@
         @click="$emit('close-modal')"
       />
       <div class="submary">
-        <img :src="recipe.ATT_FILE_NO_MK" alt="recipe_detail_img" />
+        <img :data-lazy="recipe.ATT_FILE_NO_MK" v-lazyload />
         <h2>{{ recipe.RCP_NM }} 레시피</h2>
       </div>
       <div class="info">
@@ -47,7 +47,7 @@
         <span class="process_title">조리 과정</span>
         <ul class="list_process">
           <li v-for="manual in getManual" :key="manual">
-            <img :src="manual.img" alt="manual_img" />
+            <img :data-lazy="manual.img" v-lazyload />
             <span>{{ manual.explain }}</span>
           </li>
         </ul>
@@ -66,12 +66,7 @@ export default {
   data() {
     return {}
   },
-  setup() {},
-  created() {
-    console.log(this.recipe)
-  },
-  mounted() {},
-  unmounted() {},
+  created() {},
   computed: {
     getRecipeDetail() {
       return this.recipe.RCP_PARTS_DTLS.replaceAll('\n', ',')
