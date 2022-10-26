@@ -3,7 +3,7 @@
     <Header />
     <Banner />
     <h2 v-if="recipes.length < 1">스크랩된 레시피가 없습니다.</h2>
-    <RecipeList :recipes="recipes" />
+    <RecipeList :recipes="recipes" types="scrap" />
     <Footer />
   </div>
 </template>

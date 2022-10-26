@@ -4,7 +4,7 @@
     <Banner />
     <Category />
     <Loader v-if="isLoading === true" />
-    <RecipeList v-if="isLoading === false" :recipes="recipes" />
+    <RecipeList v-if="isLoading === false" :recipes="recipes" types="all" />
     <Footer />
   </div>
 </template>
@@ -45,7 +45,7 @@ export default {
         this.isLoading = true
         const options = {
           method: 'GET',
-          url: `http://openapi.foodsafetykorea.go.kr/api/${process.env.VUE_APP_API_KEY}/COOKRCP01/json/1/1000`
+          url: `https://openapi.foodsafetykorea.go.kr/api/${process.env.VUE_APP_API_KEY}/COOKRCP01/json/1/1000`
         }
         const response = await axios.request(options)
         this.recipes = response.data.COOKRCP01.row
